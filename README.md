@@ -99,17 +99,31 @@ Tables can be updated whenever a new source is identified. All tables should be 
 ### Data Model Justification
 In the project I am using flexible schema which Cassandra database is providing. Data in Cassandra is modeled around specific queries. It is optimal solution when data engineers know what queries exactly need to be supported. Cassandra queries can be performed more rapidly because the database uses a single table approach, in contrary to the relational database model where data is stored in multiple tables. In this project we use Yelp dataset that is a snapshot of relational database. In order to prepare it for Cassandra I needed to denormalize 2 tables by joining them with foreign key to be able to store needed by queries data in one table instead of two.
 
-### Output of sample queries
+### Quality test 1
 
-### sample query on table: reviews_by_id_source
+The first quality test is checking the total number of rows that existed in the source and compering it to count of rows in final tables. Results are presented below:
+
+![quality_test1](assets/quality_test1.png)
+
+### Quality test 2
+
+The second quality test is checking if both of the sources are present in final set and also checking if they are correctly distributed (meaning by number of rows). Results are presented below:
+
+![quality_test2](assets/quality_test2.png)
+
+### Quality test 3 - output of sample queries
+
+Last quality check I performed  is ensuring that the final dataset(s) contains or does not contain some values that should be in the final set.
+
+#### sample query on table: reviews_by_id_source
 
 ![reviews_by_id_source](assets/sample_query2.png)
 
-### sample query on table: places_by_city
+#### sample query on table: places_by_city
 
 ![places_by_city](assets/sample_query3.png)
 
-### sample query on table: place_by_review
+#### sample query on table: place_by_review
 
 ![place_by_review](assets/sample_query1.png)
 
