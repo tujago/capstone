@@ -102,7 +102,13 @@ Database - Cassandra - was chosen as it is a perfect choise for handling a high 
 Tables can be updated whenever a new source is identified. All tables should be update in an append-only mode.
 
 ### Data Model Justification
-In the project I am using flexible schema which Cassandra database is providing. Data in Cassandra is modeled around specific queries. It is optimal solution when data engineers know what queries exactly need to be supported. Cassandra queries can be performed more rapidly because the database uses a single table approach, in contrary to the relational database model where data is stored in multiple tables. In this project we use Yelp dataset that is a snapshot of relational database. In order to prepare it for Cassandra I needed to denormalize 2 tables by joining them with foreign key to be able to store needed by queries data in one table instead of two.
+The database needed to be model in such way that it will answear on following three questions of the data the data model:
+
+1. Give me the review text, rating and date of review in the reviews history having review_id and source.
+2. Give me the name of the reviewed place, review text, rating, source of review in the reviews history having city and review_id.
+3. Give me name of the place, city, address and postal_code having name of the place review_id and source.
+
+Therefore in the project I am using flexible schema which Cassandra database is providing. Data in Cassandra is modeled around specific queries. It is optimal solution when data engineers know what queries exactly need to be supported. Cassandra queries can be performed more rapidly because the database uses a single table approach, in contrary to the relational database model where data is stored in multiple tables. In this project we use Yelp dataset that is a snapshot of relational database. In order to prepare it for Cassandra I needed to denormalize 2 tables by joining them with foreign key to be able to store needed by queries data in one table instead of two. 
 
 ### Quality test 1
 
