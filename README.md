@@ -60,14 +60,17 @@ Data Dictionary:
 
 ## Step 5: Complete Project Write Up
 
-Tools and Technologies
-Python/Pandas for data analysis and processing
-Cassandra for storing data.
+### Tools and Technologies
+Programming language - Python. It was chosen because it provides a huge number of libraries to work on Big Data, it is easy to use 
 
-Data Update Frequency
+Library - Pandas was used because it can handle missing data, cleaning up the data and it supports multiple file formats.
+
+Database - Cassandra - was chosen as it is a perfect choise for handling a high volume of data with ease. As for the project we need fast wrties and reads only and the queries are known before modeling database - we do not need relational database.
+
+### Data Update Frequency
 Tables can be updated whenever a new source is identified. All tables should be update in an append-only mode.
 
-Future Design Considerations
+### Future Design Considerations
 
 If the data was increased by 100x.
 Using Spark for data processing or AWS EMR distributed data cluster is needed. Also for inserting I would use dsbulk.
