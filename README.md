@@ -32,12 +32,17 @@ To explore the dataset I imported it to Jupyter Notebook to get an overview on t
 
 ## Step 3: Define the Data Model
 
+Diagram with sources and outcome tables:
 
-[table3.png](assets/table3.png)
+![etl_schema.png](assets/etl_schema.png)
 
-[table2.png](assets/table2.png)
+Result tables:
 
-[table1.png](assets/table1.png)
+![table3.png](assets/table3.png)
+
+![table2.png](assets/table2.png)
+
+![table1.png](assets/table1.png)
 
 ## Step 4: Run ETL to Model the Data
 
@@ -45,18 +50,39 @@ Steps for running ETL model can be found in jupyter notebook.
 
 Data Dictionary:
 
+### table: reviews_by_id_source
 
 | column      | type | description                                          |
 | ------------- | ------ | ------------------------------------------------------ |
 | review_id   | text | the unique review id                                 |
-| review_date | date | the date of the review, formatted YYYY-MM-DD         |
 | source      | text | the source of the data, currently yelp or datafiniti |
 | review_text | text | the review itself                                    |
 | rating      | int  | the rating of the place associated with review       |
-| place       | text | The reviewed place’s name                           |
-| address     | text | the full address of the place                        |
+| review_date | date | the date of the review, formatted YYYY-MM-DD         |
+
+
+### table: places_by_city
+
+| column      | type | description                                          |
+| ------------- | ------ | ------------------------------------------------------ |
 | city        | text | the city of the reviewed place                       |
+| review_id   | text | the unique review id                                 |
+| place       | text | The reviewed place’s name                            |
+| review_text | text | the review itself                                    |
+| rating      | int  | the rating of the place associated with review       |
+| source      | text | the source of the data, currently yelp or datafiniti |
+
+### table: place_by_review
+
+| column      | type | description                                          |
+| ------------- | ------ | ------------------------------------------------------ |
+| review_id   | text | the unique review id                                 |
+| source      | text | the source of the data, currently yelp or datafiniti |
+| place       | text | The reviewed place’s name                           |
+| city        | text | the city of the reviewed place                       |
+| address     | text | the full address of the place                        |
 | postal_code | int  | the postal code of the reviewed place                |
+
 
 ## Step 5: Complete Project Write Up
 
@@ -72,6 +98,20 @@ Tables can be updated whenever a new source is identified. All tables should be 
 
 ### Data Model Justification
 In the project I am using flexible schema which Cassandra database is providing. Data in Cassandra is modeled around specific queries. It is optimal solution when data engineers know what queries exactly need to be supported. Cassandra queries can be performed more rapidly because the database uses a single table approach, in contrary to the relational database model where data is stored in multiple tables. In this project we use Yelp dataset that is a snapshot of relational database. In order to prepare it for Cassandra I needed to denormalize 2 tables by joining them with foreign key to be able to store needed by queries data in one table instead of two.
+
+### Output of sample queries
+
+### sample query on table: reviews_by_id_source
+
+![reviews_by_id_source](assets/sample_query2.png)
+
+### sample query on table: places_by_city
+
+![places_by_city](assets/sample_query3.png)
+
+### sample query on table: place_by_review
+
+![place_by_review](assets/sample_query1.png)
 
 ### Future Design Considerations
 
